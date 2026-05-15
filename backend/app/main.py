@@ -35,6 +35,12 @@ origins = [
 if os.environ.get("FRONTEND_URL"):
     origins.append(os.environ.get("FRONTEND_URL"))
 
+origins.extend([
+    "https://remindly.vercel.app",
+    "https://remindly-app.vercel.app",
+    "https://frontend-iota-six-97.vercel.app"
+])
+
 app.add_middleware(
     CORSMiddleware,
     allow_origins=origins,
@@ -43,8 +49,8 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
-# Create uploads directory for profile pictures
-UPLOAD_DIR = os.path.abspath(os.path.join(os.path.dirname(__file__), "..", "uploads"))
+# Create uploads directory for profile pictures (using /tmp for Vercel compatibility)
+UPLOAD_DIR = "/tmp/uploads"
 os.makedirs(UPLOAD_DIR, exist_ok=True)
 print(f"[INFO] Upload directory: {UPLOAD_DIR}")
 
