@@ -1,7 +1,7 @@
 import axios from "axios";
 
 const axiosClient = axios.create({
-  baseURL: "http://127.0.0.1:8000",
+  baseURL: process.env.NEXT_PUBLIC_API_URL || "http://127.0.0.1:8000",
   headers: {
     "Content-Type": "application/json",
   },
@@ -82,7 +82,7 @@ axiosClient.interceptors.response.use(
       }
 
       try {
-        const response = await axios.post('http://127.0.0.1:8000/refresh', refreshToken, {
+        const response = await axios.post(`${process.env.NEXT_PUBLIC_API_URL || 'http://127.0.0.1:8000'}/refresh`, refreshToken, {
           headers: { 'Content-Type': 'application/json' },
         });
 

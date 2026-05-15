@@ -32,6 +32,9 @@ origins = [
     "http://localhost:8000",
 ]
 
+if os.environ.get("FRONTEND_URL"):
+    origins.append(os.environ.get("FRONTEND_URL"))
+
 app.add_middleware(
     CORSMiddleware,
     allow_origins=origins,
